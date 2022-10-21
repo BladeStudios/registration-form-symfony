@@ -9,7 +9,7 @@
     DANE IDENTYFIKACYJNE
     <hr>
     {{ form_start(form) }}
-    <div class="form-container">
+    <div class="form-container" style="font-size: 0.8rem">
     <fieldset>
         <div class="row mb-1">
             {{ form_label(form.is_individual_client, null, {'label_attr':{'class':'col-sm-40'}})}}
@@ -35,8 +35,8 @@
         </div>
         <div class="row mb-1">
             {{ form_label(form.phone, null, {'label_attr':{'class':'col-sm-40'}})}}
-            <div class="col-sm-10 no-padding-right">{{ form_widget(form.dial_code) }}</div>
-            <div class="col-sm-40">{{ form_widget(form.phone) }}</div>
+            <div class="col-sm-11 no-padding-right">{{ form_widget(form.dial_code) }}</div>
+            <div class="col-sm-39">{{ form_widget(form.phone) }}</div>
         </div>
         <div class="row mb-1">
             {{ form_label(form.email, null, {'label_attr':{'class':'col-sm-40'}})}}
@@ -54,8 +54,8 @@
     </div>
     <hr>
     <div class="mb-2" style="float: right;">
-        <span class="cancel-btn">{{ form_widget(form.cancel) }}</span>
-        <span class="submit-btn">{{ form_widget(form.save) }}</span>
+        <span class="cancel-btn">{{ form_widget(form.cancel, {'attr': {'class': 'btn btn-cancel btn-sm-2', 'type': 'button'}}) }}</span>
+        <span class="submit-btn">{{ form_widget(form.save, {'attr': {'class': 'btn btn-save btn-sm-2', 'type': 'button'}}) }}</span>
     </div>
     {{ form_rest(form) }}
     {{ form_end(form) }}

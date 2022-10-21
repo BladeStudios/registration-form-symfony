@@ -1,3 +1,8 @@
+input, select, option
+{
+    font-size: 0.8rem !important;
+}
+
 .container
 {
     margin-top: 0.8rem;
@@ -9,8 +14,8 @@
 .form-container
 {
     max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 5%;
+    margin-right: 0;
 }
 
 .col-sm-10
@@ -23,6 +28,7 @@
 {
     flex: 0 0 auto;
     width: 15%;
+    padding-left: 0.35rem;
 }
 
 .col-sm-35
@@ -66,4 +72,145 @@
 .no-padding-right
 {
     padding-right: 0;
+}
+
+.form-check-input
+{
+    width: 1.35em;
+    height: 1.35em;
+    margin-top: 0.1em;
+}
+
+.form-check-label
+{
+    margin-left: 0.25em;
+}
+
+.display-none
+{
+    display: none;
+}
+
+.col-sm-11
+{
+    flex: 0 0 auto;
+    width: 11%;
+}
+
+.col-sm-39
+{
+    flex: 0 0 auto;
+    width: 39%;
+    padding-left: 0.35rem;
+}
+
+.col-sm-7
+{
+    display: flex;
+    align-items: center;
+}
+
+.cancel-btn
+{
+    float: left;
+    margin-right: 0.5rem;
+}
+
+.btn-cancel
+{
+    color: #62A3D9;
+    background-color: #fff;
+    border-color: #fff;
+    padding-left: 0.8rem;
+    padding-right: 0.8rem;
+}
+
+.btn-cancel:hover
+{
+    color: #0b5ed7;
+    background-color: #fff;
+    border-color: #fff;
+}
+
+.btn-check:focus + .btn-cancel, .btn-cancel:focus
+{
+    color: #0b5ed7;
+    background-color: #fff;
+    border-color: #fff;
+    box-shadow: 0 0 0 0.25rem rgba(49, 132, 253, 0.5);
+}
+
+.btn-check:checked + .btn-cancel, .btn-check:active + .btn-cancel, .btn-cancel:active, .btn-cancel.active, .show > .btn-cancel.dropdown-toggle
+{
+    color: #0a58ca;
+    background-color: #fff;
+    border-color: #fff;
+}
+
+.btn-check:checked + .btn-cancel:focus, .btn-check:active + .btn-cancel:focus, .btn-cancel:active:focus, .btn-cancel.active:focus, .show > .btn-cancel.dropdown-toggle:focus
+{
+    box-shadow: 0 0 0 0.25rem rgba(49, 132, 253, 0.5);
+}
+
+.btn-cancel:disabled, .btn-cancel.disabled
+{
+    color: #62A3D9;
+    background-color: #fff;
+    border-color: #fff;
+}
+
+.save-btn
+{
+    float: left;
+}
+
+.btn-sm-2
+{
+    padding: 0.25rem 0.5rem;
+    font-size: .75rem;
+}
+
+.btn-save
+{
+    color: #fff;
+    background-image: linear-gradient(to bottom, #98D4FF 0%, #76A6CE 20%, #5A82A6 100%);
+    border-color: #5986AE;
+    float: left;
+    padding-left: 0.8rem;
+    padding-right: 0.8rem;
+    border-radius: 0;
+}
+
+.btn-save:hover
+{
+    color: #fff;
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+}
+
+.btn-check:focus + .btn-save, .btn-save:focus
+{
+    color: #fff;
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+    box-shadow: 0 0 0 0.25rem rgba(49, 132, 253, 0.5);
+}
+
+.btn-check:checked + .btn-save, .btn-check:active + .btn-save, .btn-save:active, .btn-save.active, .show > .btn-save.dropdown-toggle
+{
+    color: #fff;
+    background-color: #0a58ca;
+    border-color: #0a53be;
+}
+
+.btn-check:checked + .btn-save:focus, .btn-check:active + .btn-save:focus, .btn-save:active:focus, .btn-save.active:focus, .show > .btn-save.dropdown-toggle:focus
+{
+    box-shadow: 0 0 0 0.25rem rgba(49, 132, 253, 0.5);
+}
+
+.btn-save:disabled, .btn-save.disabled
+{
+    color: #fff;
+    background-color: #62A3D9;
+    border-color: #62A3D9;
 }
