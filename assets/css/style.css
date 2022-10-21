@@ -12,3 +12,58 @@
     margin-left: auto;
     margin-right: auto;
 }
+
+.col-sm-10
+{
+    flex: 0 0 auto;
+    width: 10%;
+}
+
+.col-sm-15
+{
+    flex: 0 0 auto;
+    width: 15%;
+}
+
+.col-sm-35
+{
+    flex: 0 0 auto;
+    width: 35%;
+}
+
+.col-sm-40
+{
+    flex: 0 0 auto;
+    width: 40%;
+}
+
+.form-check
+{
+    float: left;
+    margin-right: 2rem;
+}
+
+.form-control
+{
+    padding: 0.1rem 0.25rem;
+    border-radius: 0;
+}
+
+.form-select
+{
+    padding: 0.1rem 0.25rem;
+    border-radius: 0;
+}
+
+.col-form-label
+{
+    padding: 0;
+    text-align: right;
+    height: 100%;
+    line-height: 150%;
+}
+
+.no-padding-right
+{
+    padding-right: 0;
+}
