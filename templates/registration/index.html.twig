@@ -61,3 +61,59 @@
     {{ form_end(form) }}
 </div>
 {% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script>
+$(document).ready(function() {
+
+    $.ajax("{{ path('ajax_voivodeships') }}", {
+        type: 'POST',
+        data: {},
+        success: function(data, status, xhr){
+            console.log(data);
+            appendVoivodeships(data);
+        }
+    });
+
+    function appendVoivodeships(voivodeships)
+    {
+        select_element = $('#client_form_voivodeship');
+        select_element.empty();
+
+        $.each(voivodeships, function(index, value){
+            option_element = '<option value="'+value+'">'+value+'</option>';
+            select_element.append(option_element);
+        });
+    }
+
+    pesel_input = $('#client_form_pesel');
+    pesel_row = pesel_input.parent().parent();
+
+    nip_input = $('#client_form_nip');
+    nip_row = nip_input.parent().parent();
+
+    name_label = $('[for="client_form_name"]');
+
+    client_radio_button = $('#client_form_is_individual_client_0');
+    company_radio_button = $('#client_form_is_individual_client_1');
+
+    client_radio_button.click(function(){
+        pesel_row.removeClass('d-none');
+        nip_row.addClass('d-none');
+        name_label.text('Imię i nazwisko:');
+        nip_input.removeAttr('required');
+        pesel_input.attr('required','required');
+    });
+
+    company_radio_button.click(function(){
+        nip_row.removeClass('d-none');
+        pesel_row.addClass('d-none');
+        name_label.text('Firma:');
+        pesel_input.removeAttr('required');
+        nip_input.attr('required','required');
+    });
+
+});
+</script>
+{% endblock %}

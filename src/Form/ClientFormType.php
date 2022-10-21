@@ -10,6 +10,8 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormEvent;
 
 class ClientFormType extends AbstractType
 {
@@ -34,8 +36,7 @@ class ClientFormType extends AbstractType
                 'label' => 'Województwo:',
                 'expanded' => false,
                 'multiple' => false,
-                'choices' =>
-                [
+                'choices' => [
                     'Wczytywanie...' => ''
                 ]
                 ])
@@ -55,6 +56,7 @@ class ClientFormType extends AbstractType
                 ])
             ->add('cancel', ButtonType::class, ['label' => 'ANULUJ'])
             ->add('save', SubmitType::class, ['label' => 'ZAPISZ'])
+            ->get('voivodeship')->resetViewTransformers()
         ;
     }
 
