@@ -19,7 +19,7 @@
       <td>{{ client.name }}</td>
       <td>
         <a href="#">Modyfikuj</a>
-        <a href="#">Usuń</a>
+        <a onclick="return confirm('Czy na pewno chcesz usunąć wpis?')" href="{{path('admin_delete',{'id':client.id})}}">Usuń</a>
       </td>
     </tr>
     {% endfor %}

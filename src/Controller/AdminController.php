@@ -24,4 +24,19 @@ class AdminController extends AbstractController
             'clients' => $clients
         ]);
     }
+
+    /**
+     * @Route("/admin/delete/{id}", name="admin_delete")
+     */
+    public function delete(ManagerRegistry $doctrine, Client $id): Response
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
+        $client = $doctrine->getManager();
+        $client->remove($id);
+        $client->flush();
+
+        return $this->redirectToRoute('app_admin');
+    }
 }
