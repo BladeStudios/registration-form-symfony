@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dane w formie widoku HTML{% endblock %}
+
+{% block body %}
+<div class="container client-view">
+{% if not client %}
+Wpis o id {{id}} nie istnieje.
+{% else %}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Pole</th>
+      <th scope="col">Wartość</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ID</td>
+      <td>{{ client.id }}</td>
+    </tr>
+    <tr>
+      <td>{% if client.isIndividualClient %}Imię i nazwisko{% else %}Firma{% endif %}</td>
+      <td>{{ client.name }}</td>
+    </tr>
+    <tr>
+      <td>Ulica</td>
+      <td>{{ client.streetName }}</td>
+    </tr>
+    <tr>
+      <td>Nr domu</td>
+      <td>{{ client.streetNumber }}</td>
+    </tr>
+    <tr>
+      <td>Miasto</td>
+      <td>{{ client.city }}</td>
+    </tr>
+    <tr>
+      <td>Kod pocztowy</td>
+      <td>{{ client.postalCode }}</td>
+    </tr>
+    <tr>
+      <td>Województwo</td>
+      <td>{{ client.voivodeship }}</td>
+    </tr>
+    <tr>
+      <td>Nr telefonu</td>
+      <td>{{ client.phone }}</td>
+    </tr>
+    <tr>
+      <td>E-mail</td>
+      <td>{{ client.email }}</td>
+    </tr>
+    <tr>
+      {% if client.isIndividualClient %}
+      <td>PESEL</td>
+      <td>{{ client.pesel }}</td>
+      {% else %}
+      <td>NIP</td>
+      <td>{{ client.nip }}</td>
+      {% endif %}
+    </tr>
+  </tbody>
+</table>
+{% endif %}
+<br>
+<a href="{{ path('home') }}">Powrót</a>
+</div>
+{% endblock %}

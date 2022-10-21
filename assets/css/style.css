@@ -214,3 +214,14 @@ input, select, option
     background-color: #62A3D9;
     border-color: #62A3D9;
 }
+
+.client-view
+{
+    text-align: center;
+    font-size: 0.8rem;
+}
+
+table
+{
+    text-align: left;
+}
