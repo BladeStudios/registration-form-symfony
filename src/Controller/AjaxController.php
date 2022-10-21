@@ -15,6 +15,9 @@ class AjaxController extends AbstractController
      */
     public function index(Request $request)
     {
+        if(!$request->isXMLHttpRequest())
+            return new Response('Cannot use a method without an AJAX call.');
+
         $url = 'http://api.dro.nazwa.pl/';
 
         $ch = curl_init();
