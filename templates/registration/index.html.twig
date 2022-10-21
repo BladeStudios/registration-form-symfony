@@ -3,5 +3,59 @@
 {% block title %}Zarejestruj się!{% endblock %}
 
 {% block body %}
-
+<div class="container">
+    DANE IDENTYFIKACYJNE
+    <hr>
+    {{ form_start(form) }}
+    <div class="form-container">
+    <fieldset>
+        <div>
+            {{ form_label(form.is_individual_client)}}
+            <div>{{ form_widget(form.is_individual_client) }}</div>
+        </div>
+        <div>
+            {{ form_label(form.name)}}
+            <div>{{ form_widget(form.name) }}</div>
+        </div>
+        <div>
+            {{ form_label(form.street_name)}}
+            <div>{{ form_widget(form.street_name) }}</div>
+            <div>{{ form_widget(form.street_number) }}</div>
+        </div>
+        <div>
+            {{ form_label(form.city)}}
+            <div>{{ form_widget(form.city) }}</div>
+            <div>{{ form_widget(form.postal_code) }}</div>
+        </div>
+        <div>
+            {{ form_label(form.voivodeship)}}
+            <div>{{ form_widget(form.voivodeship) }}</div>
+        </div>
+        <div>
+            {{ form_label(form.phone)}}
+            <div>{{ form_widget(form.dial_code) }}</div>
+            <div>{{ form_widget(form.phone) }}</div>
+        </div>
+        <div>
+            {{ form_label(form.email)}}
+            <div>{{ form_widget(form.email) }}</div>
+        </div>
+        <div>
+            {{ form_label(form.pesel)}}
+            <div>{{ form_widget(form.pesel) }}</div>
+        </div>
+        <div>
+            {{ form_label(form.nip)}}
+            <div>{{ form_widget(form.nip) }}</div>
+        </div>
+    </fieldset>
+    </div>
+    <hr>
+    <div style="float: right;">
+        <span class="cancel-btn">{{ form_widget(form.cancel) }}</span>
+        <span class="submit-btn">{{ form_widget(form.save) }}</span>
+    </div>
+    {{ form_rest(form) }}
+    {{ form_end(form) }}
+</div>
 {% endblock %}
