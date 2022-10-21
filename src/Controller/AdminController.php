@@ -7,11 +7,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Client;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Form\ClientFormType;
 
 class AdminController extends AbstractController
 {
     /**
-     * @Route("/admin", name="app_admin")
+     * @Route("/admin", name="admin")
      */
     public function index(ManagerRegistry $doctrine): Response
     {
@@ -38,5 +39,28 @@ class AdminController extends AbstractController
         $client->flush();
 
         return $this->redirectToRoute('app_admin');
+    }
+
+    /**
+     * @Route("/admin/modify/{id}", name="admin_modify")
+     */
+    public function modify(ManagerRegistry $doctrine, $id): Response
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
+        $client = $doctrine->getRepository(Client::class)->find($id);
+        $form = $this->createForm(ClientFormType::class, $client, array('method' => 'PUT'));
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            //TODO
+        }
+
+        return $this->render('admin/index.html.twig', [
+            'id' => $id,
+            'client' => $client,
+            'form' => $form->createView()
+        ]);
     }
 }
