@@ -57,7 +57,7 @@ class AdminController extends AbstractController
             //TODO
         }
 
-        return $this->render('admin/index.html.twig', [
+        return $this->render('admin/modify.html.twig', [
             'id' => $id,
             'client' => $client,
             'form' => $form->createView()
