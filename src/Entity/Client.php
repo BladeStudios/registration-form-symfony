@@ -73,6 +73,11 @@ class Client
      */
     private $is_individual_client;
 
+    /**
+     * @ORM\Column(type="string", length=16)
+     */
+    private $area_code;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -206,6 +211,18 @@ class Client
     public function setIsIndividualClient(bool $is_individual_client): self
     {
         $this->is_individual_client = $is_individual_client;
+
+        return $this;
+    }
+
+    public function getAreaCode(): ?string
+    {
+        return $this->area_code;
+    }
+
+    public function setAreaCode(string $area_code): self
+    {
+        $this->area_code = $area_code;
 
         return $this;
     }
