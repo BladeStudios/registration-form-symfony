@@ -45,10 +45,14 @@ class ClientFormType extends AbstractType
                 ])
             ->add('phone', TextType::class, ['label' => 'Telefon:'])
             ->add('email', TextType::class, ['label' => 'Email:'])
-            ->add('pesel', TextType::class, ['label' => 'PESEL:'])
+            ->add('pesel', TextType::class, [
+                'label' => 'PESEL:',
+                'empty_data' => null
+                ])
             ->add('nip', TextType::class, [
                 'label' => 'NIP:',
-                'required' => false
+                'required' => false,
+                'empty_data' => null
                 ])
             ->add('cancel', ButtonType::class, ['label' => 'ANULUJ'])
             ->add('save', SubmitType::class, ['label' => 'ZAPISZ'])
