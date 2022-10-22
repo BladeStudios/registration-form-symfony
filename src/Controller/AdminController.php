@@ -8,6 +8,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Client;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Form\ClientFormType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\HttpFoundation\Request;
 
 class AdminController extends AbstractController
 {
@@ -44,22 +46,32 @@ class AdminController extends AbstractController
     /**
      * @Route("/admin/modify/{id}", name="admin_modify")
      */
-    public function modify(ManagerRegistry $doctrine, $id): Response
+    public function modify(Request $request, ManagerRegistry $doctrine, $id): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
         $client = $doctrine->getRepository(Client::class)->find($id);
-        $form = $this->createForm(ClientFormType::class, $client, array('method' => 'PUT'));
+        $form = $this->createForm(ClientFormType::class, $client);
+
+        $form->add('voivodeship', TextType::class, [
+            'label' => 'Województwo:'
+        ]);
+
+        $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid())
         {
-            //TODO
+            $entityManager = $doctrine->getManager();
+            $entityManager->persist($client);
+            $entityManager->flush();
+            $this->addFlash('success', 'Pomyślnie zmodyfikowano rekord!');
+            return $this->redirectToRoute('admin_modify',[
+                'id' => $id
+            ]);
         }
 
         return $this->render('admin/modify.html.twig', [
-            'id' => $id,
-            'client' => $client,
             'form' => $form->createView()
         ]);
     }

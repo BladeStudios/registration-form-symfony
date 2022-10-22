@@ -19,8 +19,8 @@
       <td>{{ client.id }}</td>
       <td>{{ client.name }}</td>
       <td>
-        <a href="{{path('admin_modify',{'id':client.id})}}">Modyfikuj</a>
-        <a onclick="return confirm('Czy na pewno chcesz usunąć wpis?')" href="{{path('admin_delete',{'id':client.id})}}">Usuń</a>
+        <a class="btn btn-primary btn-sm-2" href="{{path('admin_modify',{'id':client.id})}}">Modyfikuj</a>
+        <a class="btn btn-primary btn-sm-2" onclick="return confirm('Czy na pewno chcesz usunąć wpis?')" href="{{path('admin_delete',{'id':client.id})}}">Usuń</a>
       </td>
     </tr>
     {% endfor %}
@@ -28,6 +28,6 @@
   </tbody>
 </table>
 <br>
-<a href="{{ path('home') }}">Powrót</a>
+<a class="btn btn-secondary btn-sm-2" href="{{ path('home') }}">Powrót</a>
 </div>
 {% endblock %}
