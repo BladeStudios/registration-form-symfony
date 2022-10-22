@@ -1,9 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Dane w formie widoku HTML{% endblock %}
+{% block title %}Dane klienta/firmy{% endblock %}
 
 {% block body %}
-<div class="container client-view">
+<div class="container">
+<h3>Dane klienta/firmy</h3>
 {% if not client %}
 Wpis o id {{id}} nie istnieje.
 {% else %}

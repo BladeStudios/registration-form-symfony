@@ -9,6 +9,8 @@ input, select, option
     max-width: 750px;
     margin-left: auto;
     margin-right: auto;
+    text-align: center;
+    font-size: 0.8rem;
 }
 
 .form-container
@@ -215,13 +217,12 @@ input, select, option
     border-color: #62A3D9;
 }
 
-.client-view
-{
-    text-align: center;
-    font-size: 0.8rem;
-}
-
 table
 {
     text-align: left;
+}
+
+h3
+{
+    margin-bottom: 1.5rem;
 }
