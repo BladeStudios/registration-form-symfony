@@ -38,7 +38,7 @@ class AdminController extends AbstractController
         $client->remove($id);
         $client->flush();
 
-        return $this->redirectToRoute('app_admin');
+        return $this->redirectToRoute('admin');
     }
 
     /**
