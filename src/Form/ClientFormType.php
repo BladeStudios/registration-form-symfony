@@ -35,10 +35,7 @@ class ClientFormType extends AbstractType
             ->add('voivodeship', ChoiceType::class, [
                 'label' => 'Województwo:',
                 'expanded' => false,
-                'multiple' => false,
-                'choices' => [
-                    'Wczytywanie...' => ''
-                ]
+                'multiple' => false
                 ])
             ->add('dial_code', TextType::class, [
                 'label' => false,
