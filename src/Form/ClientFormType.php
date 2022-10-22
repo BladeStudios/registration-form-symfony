@@ -37,9 +37,8 @@ class ClientFormType extends AbstractType
                 'expanded' => false,
                 'multiple' => false
                 ])
-            ->add('dial_code', TextType::class, [
+            ->add('area_code', TextType::class, [
                 'label' => false,
-                'mapped' => false,
                 'attr' => [
                     'placeholder' => ' +48'
                 ]
