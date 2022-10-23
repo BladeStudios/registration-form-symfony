@@ -120,16 +120,24 @@
 {{ parent() }}
 <script>
 $(document).ready(function() {
-    pesel_input = $('#client_form_pesel');
-    pesel_row = pesel_input.parent().parent();
-
-    nip_input = $('#client_form_nip');
-    nip_row = nip_input.parent().parent();
-
-    name_label = $('[for="client_form_name"]');
 
     client_radio_button = $('#client_form_is_individual_client_0');
     company_radio_button = $('#client_form_is_individual_client_1');
+    name_input = $('#client_form_name');
+    street_name_input = $('#client_form_street_name');
+    street_number_input = $('#client_form_street_number');
+    city_input = $('#client_form_city');
+    postal_code_input = $('#client_form_postal_code');
+    voivodeship_select_list = $('#client_form_voivodeship');
+    area_code_input = $('#client_form_area_code');
+    phone_input = $('#client_form_phone');
+    email_input = $('#client_form_email');
+    pesel_input = $('#client_form_pesel');
+    nip_input = $('#client_form_nip');
+
+    pesel_row = pesel_input.parent().parent();
+    nip_row = nip_input.parent().parent();
+    name_label = $('[for="client_form_name"]');
 
     enableZapiszButton();
 
@@ -181,6 +189,249 @@ $(document).ready(function() {
 
     company_radio_button.click(function(){
         selectCompany();
+    });
+
+    function showErrorMessage(element, message)
+    {
+        element.addClass('is-invalid');
+        if(element !== client_radio_button)
+            errorBox = getErrorBoxForElement(element);
+        else
+        {
+            errorBox = getErrorBoxForElement(element, true);
+            company_radio_button.addClass('is-invalid');
+        }
+        errorMessage = '<div class="invalid-feedback d-block">'+message+'</div>';
+        errorBox.append(errorMessage);
+    }
+
+    function getErrorBoxForElement(element, is_radio_button=false)
+    {
+        if(!is_radio_button)
+            return element.parent().parent().children(".error-box");
+        else
+            return element.parent().parent().parent().parent().children(".error-box");
+    }
+
+    function clearAllErrorBoxes()
+    {
+        clearElementAndRemoveIsInvalidClass(client_radio_button);
+        clearElementAndRemoveIsInvalidClass(company_radio_button);
+        clearElementAndRemoveIsInvalidClass(name_input);
+        clearElementAndRemoveIsInvalidClass(street_name_input);
+        clearElementAndRemoveIsInvalidClass(street_number_input);
+        clearElementAndRemoveIsInvalidClass(city_input);
+        clearElementAndRemoveIsInvalidClass(postal_code_input);
+        clearElementAndRemoveIsInvalidClass(voivodeship_select_list);
+        clearElementAndRemoveIsInvalidClass(area_code_input);
+        clearElementAndRemoveIsInvalidClass(phone_input);
+        clearElementAndRemoveIsInvalidClass(email_input);
+        clearElementAndRemoveIsInvalidClass(pesel_input);
+        clearElementAndRemoveIsInvalidClass(nip_input);
+    }
+
+    function clearElementAndRemoveIsInvalidClass(element)
+    {
+        if(element !== client_radio_button)
+            getErrorBoxForElement(element).empty();
+        else
+            getErrorBoxForElement(element, true).empty();
+        element.removeClass('is-invalid');
+    }
+
+    function validateStatusPrawny()
+    {
+        if(!client_radio_button.is(':checked') && !company_radio_button.is(':checked'))
+        {
+            is_validation_successfull = false;
+            showErrorMessage(client_radio_button,'Nie wybrano rodzaju statusu prawnego.');
+        }
+    }
+
+    function validateLength(element, min_length, max_length, message)
+    {
+        length = element.val().length;
+        if(length < min_length || length > max_length)
+        {
+            is_validation_successfull = false;
+            showErrorMessage(element,message);
+        }
+    }
+
+    function validateIsBlank(element,message)
+    {
+        if(element.val()=='')
+        {
+            is_validation_successfull = false;
+            showErrorMessage(element,message);
+        }
+    }
+
+    function isInputEmpty(element)
+    {
+        if(element.val()=='')
+            return true;
+        else
+            return false;
+    }
+
+    function validateRegex(element, regex, message)
+    {
+        if(!isInputEmpty(element) && regex.test(element.val())==false)
+        {
+            is_validation_successfull = false;
+            showErrorMessage(element,message);
+        }
+    }
+
+    function validatePeselCheckSum()
+    {
+        pesel = pesel_input.val();
+        var digits = (""+pesel).split("");
+        if ((parseInt(pesel.substring( 4, 6)) > 31)||(parseInt(pesel.substring( 2, 4)) > 12))
+            return false;
+         
+        var checksum = (1*parseInt(digits[0]) + 3*parseInt(digits[1]) + 7*parseInt(digits[2]) + 9*parseInt(digits[3]) + 1*parseInt(digits[4]) + 3*parseInt(digits[5]) + 7*parseInt(digits[6]) + 9*parseInt(digits[7]) + 1*parseInt(digits[8]) + 3*parseInt(digits[9]))%10;
+        if(checksum==0) checksum = 10;
+            checksum = 10 - checksum;
+ 
+        return (parseInt(digits[10])==checksum);
+    }
+
+    function validateNipRegexes(nip_element)
+    {
+        reg1 = /^[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}$/;
+        reg2 = /^[0-9]{3}-[0-9]{2}-[0-9]{2}-[0-9]{3}$/;
+        reg3 = /^[0-9]{10}$/;
+
+        if(reg1.test(nip_element.val())==false &&
+        reg2.test(nip_element.val())==false &&
+        reg3.test(nip_element.val())==false)
+            return false;
+        else
+            return true;
+    }
+
+    function validateNipCheckSum(nip_input)
+    {
+        nip = nip_input.val();
+        nipWithoutDashes = nip.replace(/-/g,"");
+        reg = /^[0-9]{10}$/;
+        if(reg.test(nipWithoutDashes) == false)
+            return false;
+        else
+        {
+            var digits = (""+nipWithoutDashes).split("");
+            var checksum = (6*parseInt(digits[0]) + 5*parseInt(digits[1]) + 7*parseInt(digits[2]) + 2*parseInt(digits[3]) + 3*parseInt(digits[4]) + 4*parseInt(digits[5]) + 5*parseInt(digits[6]) + 6*parseInt(digits[7]) + 7*parseInt(digits[8]))%11;
+            
+            return (parseInt(digits[9])==checksum);
+        }
+    }
+
+    function validateImieINazwiskoLubFirma()
+    {
+        validateLength(name_input,2,255,'Imię i nazwisko lub nazwa firmy powinny zawierać od 2 do 255 znaków.');
+    }
+
+    function validateUlica()
+    {
+        validateLength(street_name_input,2,255,'Nazwa ulicy powinna zawierać od 2 do 255 znaków.');
+    }
+
+    function validateNrDomu()
+    {
+        validateLength(street_number_input,1,30,'Numer domu powinien zawierać od 1 do 30 znaków.');
+    }
+
+    function validateMiejscowosc()
+    {
+        validateLength(city_input,2,255,'Nazwa miejscowości powinna zawierać od 2 do 255 znaków.');
+    }
+
+    function validateKodPocztowy()
+    {
+        validateLength(postal_code_input,6,6,'Kod pocztowy powinien zawierać dokładnie 6 znaków.');
+        validateRegex(postal_code_input,/^[0-9]{2}-[0-9]{3}/,'Niewłaściwy format kodu pocztowego.');
+    }
+
+    function validateWojewodztwo()
+    {
+        validateIsBlank(voivodeship_select_list,'Nie wybrano województwa.');
+        if(!isInputEmpty(voivodeship_select_list))
+            validateLength(voivodeship_select_list,2,100,'Nazwa województwa powinna zawierać od 2 do 100 znaków.');
+    }
+
+    function validateNumerKierunkowy()
+    {
+        validateLength(area_code_input,2,8,'Numer kierunkowy powinien zawierać od 2 do 8 cyfr.');
+        validateRegex(area_code_input,/^\+[0-9]+/,'Numer kierunkowy powinien zawierać znak +, a następnie same cyfry.');
+    }
+
+    function validateTelefon()
+    {
+        validateLength(phone_input,5,15,'Numer telefonu powinien zawierać od 5 do 15 cyfr.');
+        validateRegex(phone_input,/^[0-9]*$/,'Numer telefonu nie może zawierać innych znaków niż cyfry.');
+    }
+
+    function validateEmail()
+    {
+        validateLength(email_input,4,255,'E-mail może zawierać od 4 do 255 znaków.');
+        validateRegex(email_input,/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,'Nieprawidłowy adres e-mail.');
+    }
+
+    function validatePesel()
+    {
+        if(client_radio_button.is(':checked') || (!client_radio_button.is(':checked') && !company_radio_button.is(':checked')))
+        {
+            validateIsBlank(pesel_input,'Nie podano numeru PESEL.');
+            validateRegex(pesel_input,/^[0-9]{11}$/,'PESEL musi składać się z 11 cyfr.');
+            if(!validatePeselCheckSum)
+            {
+                is_validation_successfull = false;
+                showErrorMessage(pesel_input,'Niepoprawny PESEL.');
+            }
+        }
+    }
+
+    function validateNip()
+    {
+        if(company_radio_button.is(':checked'))
+        {
+            validateIsBlank(nip_input,'Nie podano numeru NIP.');
+            if(!isInputEmpty(nip_input) && !validateNipRegexes(nip_input))
+            {
+                is_validation_successfull = false;
+                showErrorMessage(nip_input,'Nieprawidłowy format. NIP powinien składać się z 10 cyfr, w formacie XXX-XXX-XX-XX, XXX-XX-XX-XXX lub XXXXXXXXXX.');
+            }
+            if(!validateNipCheckSum)
+            {
+                is_validation_successfull = false;
+                showErrorMessage(nip_input,'Niepoprawny NIP.');
+            }
+        }
+    }
+
+    $('form[name="client_form"]').submit(function() {
+        is_validation_successfull = true;
+        clearAllErrorBoxes();
+
+        validateStatusPrawny();
+        validateImieINazwiskoLubFirma();
+        validateUlica();
+        validateNrDomu()
+        validateMiejscowosc();
+        validateKodPocztowy();
+        validateWojewodztwo();
+        validateNumerKierunkowy();
+        validateTelefon();
+        validateEmail();
+        validatePesel();
+        validateNip();
+
+        if(is_validation_successfull)
+            return true; //allowed form submission
+        else
+            return false; //blocked submitting the form
     });
 
 });
