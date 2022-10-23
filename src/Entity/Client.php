@@ -67,7 +67,7 @@ class Client
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Nie podano adresu e-mail.")
+     * @Assert\Length(min=4,max=255, minMessage="E-mail może zawierać od 4 do 255 znaków.", maxMessage="E-mail może zawierać od 4 do 255 znaków.")
      * @Assert\Email(message="Nieprawidłowy adres e-mail.")
      */
     private $email;
