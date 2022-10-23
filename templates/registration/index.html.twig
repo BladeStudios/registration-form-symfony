@@ -7,47 +7,102 @@
 <h3>Rejestracja</h3>
     <div style="text-align: left">DANE IDENTYFIKACYJNE</div>
     <hr style="margin-top: 0.5rem">
-    {{ form_start(form) }}
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
     <div class="form-container" style="font-size: 0.8rem">
     <fieldset>
         <div class="row mb-1">
             {{ form_label(form.is_individual_client, null, {'label_attr':{'class':'col-sm-40'}})}}
             <div class="col-sm-7">{{ form_widget(form.is_individual_client) }}</div>
+            <div class="error-box">
+                {{ form_errors(form.is_individual_client) }}
+            </div>
         </div>
         <div class="row mb-1">
-            {{ form_label(form.name, null, {'label_attr':{'class':'col-sm-40'}})}}
-            <div class="col-sm-6">{{ form_widget(form.name) }}</div>
+            {% if (form.vars.value.isindividualclient is not null and form.vars.value.isindividualclient == false) %}
+                {{ form_label(form.name, null, {
+                    'label_attr':{'class':'col-sm-40'},
+                    'label':'Firma'
+                })}}
+            {% else %}
+                {{ form_label(form.name, null, {
+                    'label_attr':{'class':'col-sm-40'}
+                })}}
+            {% endif %}
+            <div class="col-sm-6">
+                {{ form_widget(form.name) }}
+            </div>
+            <div class="error-box">
+                {{ form_errors(form.name) }}
+            </div>
         </div>
         <div class="row mb-1">
             {{ form_label(form.street_name, null, {'label_attr':{'class':'col-sm-40'}})}}
-            <div class="col-sm-35 no-padding-right">{{ form_widget(form.street_name) }}</div>
+            <div class="col-sm-35 no-padding-right">
+                {{ form_widget(form.street_name) }}
+            </div>
             <div class="col-sm-15">{{ form_widget(form.street_number) }}</div>
+            <div class="error-box">
+                {{ form_errors(form.street_name) }}
+                {{ form_errors(form.street_number) }}
+            </div>
         </div>
         <div class="row mb-1">
             {{ form_label(form.city, null, {'label_attr':{'class':'col-sm-40'}})}}
-            <div class="col-sm-35 no-padding-right">{{ form_widget(form.city) }}</div>
+            <div class="col-sm-35 no-padding-right">
+                {{ form_widget(form.city) }}
+            </div>
             <div class="col-sm-15">{{ form_widget(form.postal_code) }}</div>
+            <div class="error-box">
+                {{ form_errors(form.city) }}
+                {{ form_errors(form.postal_code) }}
+            </div>
         </div>
         <div class="row mb-1">
             {{ form_label(form.voivodeship, null, {'label_attr':{'class':'col-sm-40'}})}}
-            <div class="col-sm-6">{{ form_widget(form.voivodeship) }}</div>
+            <div class="col-sm-6">
+                {{ form_widget(form.voivodeship) }}
+            </div>
+            <div class="error-box">
+                {{ form_errors(form.voivodeship) }}
+            </div>
         </div>
         <div class="row mb-1">
             {{ form_label(form.phone, null, {'label_attr':{'class':'col-sm-40'}})}}
-            <div class="col-sm-11 no-padding-right">{{ form_widget(form.area_code, {'attr':{'autocomplete':'tel-country-code'}}) }}</div>
+            <div class="col-sm-11 no-padding-right">
+                {{ form_widget(form.area_code, {'attr':{'autocomplete':'tel-country-code'}}) }}
+            </div>
             <div class="col-sm-39">{{ form_widget(form.phone, {'attr':{'autocomplete':'tel-national'}}) }}</div>
+            <div class="error-box">
+                {{ form_errors(form.area_code) }}
+                {{ form_errors(form.phone) }}
+            </div>
         </div>
         <div class="row mb-1">
             {{ form_label(form.email, null, {'label_attr':{'class':'col-sm-40'}})}}
-            <div class="col-sm-6">{{ form_widget(form.email) }}</div>
+            <div class="col-sm-6">
+                {{ form_widget(form.email) }}
+            </div>
+            <div class="error-box">
+                {{ form_errors(form.email) }}
+            </div>
         </div>
-        <div class="row mb-1">
+        <div class="row mb-1{% if (form.vars.value.isindividualclient is not null and form.vars.value.isindividualclient == false) %} d-none{% endif %}">
             {{ form_label(form.pesel, null, {'label_attr':{'class':'col-sm-40'}})}}
-            <div class="col-sm-6">{{ form_widget(form.pesel) }}</div>
+            <div class="col-sm-6">
+                {{ form_widget(form.pesel) }}
+            </div>
+            <div class="error-box">
+                {{ form_errors(form.pesel) }}
+            </div>
         </div>
-        <div class="row mb-1 d-none">
+        <div class="row mb-1{% if (form.vars.value.isindividualclient is null or form.vars.value.isindividualclient == true) %} d-none{% endif %}">
             {{ form_label(form.nip, null, {'label_attr':{'class':'col-sm-40'}})}}
-            <div class="col-sm-6">{{ form_widget(form.nip) }}</div>
+            <div class="col-sm-6">
+                {{ form_widget(form.nip) }}
+            </div>
+            <div class="error-box">
+                {{ form_errors(form.nip) }}
+            </div>
         </div>
     </fieldset>
     </div>
@@ -65,6 +120,16 @@
 {{ parent() }}
 <script>
 $(document).ready(function() {
+    pesel_input = $('#client_form_pesel');
+    pesel_row = pesel_input.parent().parent();
+
+    nip_input = $('#client_form_nip');
+    nip_row = nip_input.parent().parent();
+
+    name_label = $('[for="client_form_name"]');
+
+    client_radio_button = $('#client_form_is_individual_client_0');
+    company_radio_button = $('#client_form_is_individual_client_1');
 
     $.ajax("{{ path('ajax_voivodeships') }}", {
         type: 'POST',
@@ -85,31 +150,30 @@ $(document).ready(function() {
         });
     }
 
-    pesel_input = $('#client_form_pesel');
-    pesel_row = pesel_input.parent().parent();
+    function selectClient()
+    {
+        nip_input.attr('disabled', true);
+        pesel_input.removeAttr('disabled');
+        nip_row.addClass('d-none');
+        pesel_row.removeClass('d-none');
+        name_label.text('Imię i nazwisko:');
+    }
 
-    nip_input = $('#client_form_nip');
-    nip_row = nip_input.parent().parent();
-
-    name_label = $('[for="client_form_name"]');
-
-    client_radio_button = $('#client_form_is_individual_client_0');
-    company_radio_button = $('#client_form_is_individual_client_1');
+    function selectCompany()
+    {
+        pesel_input.attr('disabled', true);
+        nip_input.removeAttr('disabled');
+        pesel_row.addClass('d-none');
+        nip_row.removeClass('d-none');
+        name_label.text('Firma:');
+    }
 
     client_radio_button.click(function(){
-        pesel_row.removeClass('d-none');
-        nip_row.addClass('d-none');
-        name_label.text('Imię i nazwisko:');
-        nip_input.removeAttr('required');
-        pesel_input.attr('required','required');
+        selectClient();
     });
 
     company_radio_button.click(function(){
-        nip_row.removeClass('d-none');
-        pesel_row.addClass('d-none');
-        name_label.text('Firma:');
-        pesel_input.removeAttr('required');
-        nip_input.attr('required','required');
+        selectCompany();
     });
 
 });

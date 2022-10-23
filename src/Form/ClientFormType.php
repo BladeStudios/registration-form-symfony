@@ -20,31 +20,57 @@ class ClientFormType extends AbstractType
                 'label' => 'Status prawny:',
                 'expanded' => true,
                 'multiple' => false,
+                'empty_data' => null,
                 'choices' => [
                     'klient indywidualny' => true,
                     'Firma' => false
                 ]
             ])
-            ->add('name', TextType::class, ['label' => 'Imię i nazwisko:'])
-            ->add('street_name', TextType::class, ['label' => 'Ulica, nr domu:'])
-            ->add('street_number', TextType::class, ['label' => false])
-            ->add('city', TextType::class, ['label' => 'Miejscowość, kod pocztowy:'])
-            ->add('postal_code', TextType::class, ['label' => false])
+            ->add('name', TextType::class, [
+                'label' => 'Imię i nazwisko:',
+                'empty_data' => ''
+                ])
+            ->add('street_name', TextType::class, [
+                'label' => 'Ulica, nr domu:',
+                'empty_data' => ''
+                ])
+            ->add('street_number', TextType::class, [
+                'label' => false,
+                'empty_data' => ''
+                ])
+            ->add('city', TextType::class, [
+                'label' => 'Miejscowość, kod pocztowy:',
+                'empty_data' => ''
+            ])
+            ->add('postal_code', TextType::class, [
+                'label' => false,
+                'empty_data' => ''
+                ])
             ->add('voivodeship', ChoiceType::class, [
                 'label' => 'Województwo:',
                 'expanded' => false,
-                'multiple' => false
+                'multiple' => false,
+                'placeholder' => 'Ładowanie listy województw...',
+                'empty_data' => ''
                 ])
             ->add('area_code', TextType::class, [
                 'label' => false,
                 'attr' => [
                     'placeholder' => ' +48'
-                ]
+                ],
+                'empty_data' => ''
                 ])
-            ->add('phone', TextType::class, ['label' => 'Telefon:'])
-            ->add('email', TextType::class, ['label' => 'Email:'])
+            ->add('phone', TextType::class, [
+                'label' => 'Telefon:',
+                'empty_data' => ''
+                ])
+            ->add('email', TextType::class, [
+                'label' => 'Email:',
+                'empty_data' => ''
+                ])
             ->add('pesel', TextType::class, [
                 'label' => 'PESEL:',
+                'required' => false,
                 'empty_data' => null
                 ])
             ->add('nip', TextType::class, [
