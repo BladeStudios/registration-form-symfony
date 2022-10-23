@@ -79,7 +79,10 @@ class ClientFormType extends AbstractType
                 'empty_data' => null
                 ])
             ->add('cancel', ButtonType::class, ['label' => 'ANULUJ'])
-            ->add('save', SubmitType::class, ['label' => 'ZAPISZ'])
+            ->add('save', SubmitType::class, [
+                'label' => 'ZAPISZ',
+                'disabled' => true
+                ])
             ->get('voivodeship')->resetViewTransformers()
         ;
     }

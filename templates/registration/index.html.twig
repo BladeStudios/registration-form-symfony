@@ -131,6 +131,8 @@ $(document).ready(function() {
     client_radio_button = $('#client_form_is_individual_client_0');
     company_radio_button = $('#client_form_is_individual_client_1');
 
+    enableZapiszButton();
+
     $.ajax("{{ path('ajax_voivodeships') }}", {
         type: 'POST',
         data: {},
@@ -138,6 +140,11 @@ $(document).ready(function() {
             appendVoivodeships(data);
         }
     });
+
+    function enableZapiszButton()
+    {
+        $('#client_form_save').removeAttr('disabled');
+    }
 
     function appendVoivodeships(voivodeships)
     {
