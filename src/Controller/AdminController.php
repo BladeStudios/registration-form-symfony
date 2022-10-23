@@ -31,15 +31,21 @@ class AdminController extends AbstractController
     /**
      * @Route("/admin/delete/{id}", name="admin_delete")
      */
-    public function delete(ManagerRegistry $doctrine, Client $id): Response
+    public function delete(ManagerRegistry $doctrine, $id): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        $client = $doctrine->getManager();
-        $client->remove($id);
-        $client->flush();
+        $client = $doctrine->getRepository(Client::class)->find($id);
+        if(!$client)
+        {
+            $this->addFlash('error', 'Rekord o id '.$id.' nie istnieje!');
+            return $this->redirectToRoute('admin');
+        }
 
+        $manager = $doctrine->getManager();
+        $manager->remove($client);
+        $manager->flush();
         return $this->redirectToRoute('admin');
     }
 
@@ -52,6 +58,11 @@ class AdminController extends AbstractController
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
         $client = $doctrine->getRepository(Client::class)->find($id);
+        if(!$client)
+        {
+            $this->addFlash('error', 'Rekord o id '.$id.' nie istnieje!');
+            return $this->redirectToRoute('admin');
+        }
         $form = $this->createForm(ClientFormType::class, $client);
 
         $form->add('voivodeship', TextType::class, [
