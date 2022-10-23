@@ -139,7 +139,7 @@ $(document).ready(function() {
     nip_row = nip_input.parent().parent();
     name_label = $('[for="client_form_name"]');
 
-    enableZapiszButton();
+    enableDisabledElements();
 
     $.ajax("{{ path('ajax_voivodeships') }}", {
         type: 'POST',
@@ -149,8 +149,12 @@ $(document).ready(function() {
         }
     });
 
-    function enableZapiszButton()
+    function enableDisabledElements()
     {
+        //radio buttony statusu prawnego
+        client_radio_button.removeAttr('disabled');
+        company_radio_button.removeAttr('disabled');
+        //przycisk Zapisz
         $('#client_form_save').removeAttr('disabled');
     }
 
