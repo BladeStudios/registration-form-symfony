@@ -10,15 +10,15 @@
 {% endif %}
 
 <form action="{{ path('app_login') }}" method="post">
-    <label for="username">Username:</label>
+    <label for="username">Login:</label>
     <input type="text" id="username" name="_username" value=""/>
-
-    <label for="password">Password:</label>
+    <br><br>
+    <label for="password">Hasło:</label>
     <input type="password" id="password" name="_password"/>
 
     <input type="hidden" name="_target_path" value="/admin"/>
-
-    <button type="submit">login</button>
+    <br><br>
+    <button class="btn btn-primary btn-sm-2" type="submit">Zaloguj</button>
 </form>
 </div>
 {% endblock %}
