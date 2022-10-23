@@ -255,3 +255,8 @@ h3
 {
     color: black;
 }
+
+.pointer-disable
+{
+    pointer-events: none;
+}

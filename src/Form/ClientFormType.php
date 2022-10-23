@@ -24,8 +24,7 @@ class ClientFormType extends AbstractType
                 'choices' => [
                     'klient indywidualny' => true,
                     'Firma' => false
-                ],
-                'disabled' => true
+                ]
             ])
             ->add('name', TextType::class, [
                 'label' => 'Imię i nazwisko:',

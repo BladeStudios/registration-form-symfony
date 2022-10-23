@@ -15,7 +15,7 @@
 <fieldset>
     <div class="row mb-1">
         {{ form_label(form.is_individual_client, null, {'label_attr':{'class':'col-sm-40'}})}}
-        <div class="col-sm-7">{{ form_widget(form.is_individual_client) }}</div>
+        <div class="col-sm-7 pointer-disable">{{ form_widget(form.is_individual_client) }}</div>
         <div class="error-box">
             {{ form_errors(form.is_individual_client) }}
         </div>
@@ -129,8 +129,7 @@ $(document).ready(function() {
     function enableDisabledElements()
     {
         //radio buttony statusu prawnego
-        client_radio_button.removeAttr('disabled');
-        company_radio_button.removeAttr('disabled');
+        $('.pointer-disable').removeClass('pointer-disable');
         //przycisk Zapisz
         $('#client_form_save').removeAttr('disabled');
     }
