@@ -45,7 +45,7 @@ In order to use an application locally, you need to have installed on your compu
 - Run XAMPP panel (xampp/xampp_start.exe)
 - Start Apache service
 - Go to your web browser and enter http://localhost/Registration-Form-Symfony/public/
-- Your are on the main page of the application (route "/"). To move around the application use buttons and links or paste the route (from next section) to URL after "/public/" part.
+- You are on the main page of the application (route "/"). To move around the application use buttons and links or paste the route (from next section) to URL after "/public/" part.
 
 ## List of routes with features
 - / - main page with registration form
