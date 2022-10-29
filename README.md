@@ -30,15 +30,12 @@ In order to use an application locally, you need to:
 - Open windows command line (Win + R shortcut, type "cmd" and click OK)
 - if you are on other disk than C:, switch to C: by typing "C:" and clicking ENTER
 - Now we're going to install all necessary packages, create a database and create an admin account to make logging into an admin panel possible. Type or paste following commands into the terminal and click ENTER after every of them:
-
-    <code>composer install</code>
-
-    <code>php bin/console doctrine:database:create</code>
-
-    <code>php bin/console doctrine:migrations:migrate</code>
-
-    <code>php bin/console doctrine:fixtures:load</code>
-
+    ```
+    composer install
+    php bin/console doctrine:database:create
+    php bin/console doctrine:migrations:migrate
+    php bin/console doctrine:fixtures:load
+    ```
 - Run XAMPP panel (xampp/xampp_start.exe)
 - Start Apache service
 - Go to your web browser and enter http://localhost/Registration-Form-Symfony/public/
