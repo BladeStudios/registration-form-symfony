@@ -13,16 +13,13 @@ Simple PHP/Symfony web application with registration form and some other feature
 - possibility to display saved data in JSON on /json/:id URL
 - login form on /admin URL; after logging in, there is a possibility to display, modify and delete the data
 
-## What do you need to run the application
+## Installation
 
-In order to use an application locally, you need to have installed on your computer:
-- Composer installed globally (https://getcomposer.org/doc/00-intro.md)
-- XAMPP (https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/8.1.10/xampp-windows-x64-8.1.10-0-VS16-installer.exe)
-- Web browser - I recommend Google Chrome version 106 or higher
-
-## How to install and run the application
-
-- Put xampp folder inside your C: disk
+In order to use an application locally, you need to:
+- Install Composer globally (https://getcomposer.org/doc/00-intro.md)
+- Install web browser - I recommend Google Chrome version 106 or higher
+- Install XAMPP (https://www.apachefriends.org/download.html)
+- Put xampp folder on your C: disk
 - Download this Git repository (for example as ZIP archive, then unpack it)
 - Rename the main folder of this repository to Registration-Form-Symfony and make sure you see inside folders like /assets, /bin, /config and so on
 - Copy and paste whole Registration-Form-Symfony folder into C:/xampp/htdocs
@@ -45,7 +42,7 @@ In order to use an application locally, you need to have installed on your compu
 - Run XAMPP panel (xampp/xampp_start.exe)
 - Start Apache service
 - Go to your web browser and enter http://localhost/Registration-Form-Symfony/public/
-- You are on the main page of the application (route "/"). To move around the application use buttons and links or paste the route (from next section) to URL after "/public/" part.
+- You are on the main page of the application (route "/"). To move around the application use buttons and links or paste the route (from next section) to URL after "/public/" part and click ENTER.
 
 ## List of routes with features
 - / - main page with registration form
