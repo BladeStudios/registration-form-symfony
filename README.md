@@ -1,7 +1,5 @@
 # Registration-Form-Symfony
 
-## Description
-
 Simple PHP/Symfony web application with registration form and some other features. Other technologies used: Composer, JavaScript, jQuery, Bootstrap, SQLite database, HTML, CSS, AJAX and JSON.
 
 ## Features
