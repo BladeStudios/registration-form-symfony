@@ -1,4 +1,4 @@
-# Registration-Form-Symfony
+# Registration Form Symfony
 
 Simple PHP/Symfony web application with registration form and some other features. Other technologies used: Composer, JavaScript, jQuery, Bootstrap, SQLite database, HTML, CSS, AJAX and JSON.
 
@@ -21,9 +21,9 @@ In order to use an application locally, you need to:
 - Install XAMPP (https://www.apachefriends.org/download.html)
 - Put xampp folder on your C: disk
 - Download this Git repository (for example as ZIP archive, then unpack it)
-- Rename the main folder of this repository to Registration-Form-Symfony and make sure you see inside folders like /assets, /bin, /config and so on
-- Copy and paste whole Registration-Form-Symfony folder into C:/xampp/htdocs
-- Make sure that in .env file (inside Registration-Form-Symfony folder) you have a line (if not, change APP_ENV to this):
+- Rename the main folder of this repository to registration-form-symfony and make sure you see inside folders like /assets, /bin, /config and so on
+- Copy and paste whole registration-form-symfony folder into C:/xampp/htdocs
+- Make sure that in .env file (inside registration-form-symfony folder) you have a line (if not, change APP_ENV to this):
 
     <code>APP_ENV=prod</code>
 
@@ -38,7 +38,7 @@ In order to use an application locally, you need to:
     ```
 - Run XAMPP panel (xampp/xampp_start.exe)
 - Start Apache service
-- Go to your web browser and enter http://localhost/Registration-Form-Symfony/public/
+- Go to your web browser and enter http://localhost/registration-form-symfony/public/
 - You are on the main page of the application (route "/"). To move around the application use buttons and links or paste the route (from next section) to URL after "/public/" part and click ENTER.
 
 ## List of routes with features
